@@ -93,7 +93,13 @@ namespace Calculator
         {
             double r;
 
-            r = tal1 / tal2;
+            if (tal2 != 0)
+                r = tal1 / tal2;
+            else
+	    {
+                r = 0;
+                Console.WriteLine("Error! Value 2 is 0! Can't divide with 0\n");
+            }
             return r;
         }
 
