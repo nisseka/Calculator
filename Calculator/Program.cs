@@ -38,8 +38,14 @@ namespace Calculator
                         case 1:         // Addition
                             result = Addition(tal1, tal2);
                             break;
-                        case 2:         // Addition
+                        case 2:         // Subtraction
                             result = Subtraction(tal1, tal2);
+                            break;
+                        case 3:         // Multiplication
+                            result = Multiplication(tal1, tal2);
+                            break;
+                        case 4:         // Division
+                            result = Division(tal1, tal2);
                             break;
                         default:
                             result = 0;
@@ -75,14 +81,29 @@ namespace Calculator
             return r;
         }
 
+        static double Multiplication(double tal1, double tal2)
+        {
+            double r;
 
-/*
-    * Function:    RequestStringFromUser
-    * 
-    * Outputs a title text specified by DisplayText in the console and records the users keypresses until return key is pressed
-    * 
-    * returns:    The recorded text string
-*/
+            r = tal1 * tal2;
+            return r;
+        }
+
+        static double Division(double tal1, double tal2)
+        {
+            double r;
+
+            r = tal1 / tal2;
+            return r;
+        }
+
+        /*
+            * Function:    RequestStringFromUser
+            * 
+            * Outputs a title text specified by DisplayText in the console and records the users keypresses until return key is pressed
+            * 
+            * returns:    The recorded text string
+        */
         static string RequestStringFromUser(string DisplayText)
         {
             string r;
@@ -146,7 +167,7 @@ namespace Calculator
 */
         static void WaitForUserPressedAKey()
         {
-            Console.Write("\nTryck en tangent för att fortsätta..");
+            Console.Write("\nPress any key to continue..");
             Console.ReadKey();
         }
 
