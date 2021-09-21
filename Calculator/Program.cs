@@ -1,5 +1,13 @@
 ﻿using System;
 
+/*
+ * Assignment #1, Calculator 
+ * 
+ * by
+ * 
+ * Stefan Sundbeck
+*/
+
 namespace Calculator
 {
     class Program
