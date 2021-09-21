@@ -4,7 +4,7 @@ namespace Calculator
 {
     class Program
     {
-        static string[] MenuItems = { "Exit", "Addition", "Subtraction", "Multiplication", "Division"
+        static string[] MenuItems = { "Exit", "Addition", "Subtraction", "Multiplication", "Division", "Square root"
         };
         static string[] ValueStr = { "Value 1", "Value 2" };
 
@@ -13,7 +13,7 @@ namespace Calculator
             bool exit = false;
             int MenuItemsCount;
             int i;
-            double result, tal1, tal2;
+            double result=0, tal1=0, tal2=0;
             do
             {
                 Console.Clear();
@@ -31,7 +31,8 @@ namespace Calculator
                     Console.WriteLine("");
 
                     tal1 = RequestNumberFromUser_Double($"{ValueStr[0]}?");
-                    tal2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
+                    if (i!= 5)
+                        tal2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
 
                     switch (i)          // Act on the selected menu item
                     {
@@ -46,6 +47,9 @@ namespace Calculator
                             break;
                         case 4:         // Division
                             result = Division(tal1, tal2);
+                            break;
+                        case 5:         // Square root
+                            result = SquareRoot(tal1);
                             break;
                         default:
                             result = 0;
@@ -103,6 +107,13 @@ namespace Calculator
             return r;
         }
 
+        static double SquareRoot(double tal1)
+        {
+            double r;
+
+            r = Math.Sqrt(tal1);
+            return r;
+        }
         /*
             * Function:    RequestStringFromUser
             * 
