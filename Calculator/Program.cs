@@ -12,8 +12,8 @@ namespace Calculator
 {
     class Program
     {
-        static string[] MenuItems = { "Exit", "Addition", "Subtraction", "Multiplication", "Division", "Square root"
-        };
+        static string[] MenuItemTitles = { "Addition", "Subtraction", "Multiplication", "Division", "Square root", "Pow" };
+        static string[] MenuItems = { "Exit", "+", "-", "*", "/", "Sqrt","Pow"};
         static string[] ValueStr = { "Value 1", "Value 2" };
 
         static void Main(string[] args)
@@ -21,12 +21,16 @@ namespace Calculator
             bool exit = false;
             int MenuItemsCount;
             int i;
-            double result=0, tal1=0, tal2=0;
+            double result=0, value1=0, value2=0;
+            string result_title;
+
             do
             {
                 Console.Clear();
 
-                Console.WriteLine("Welcome to my calculator\n");
+                Console.WriteLine("Calculator\n");
+
+                Console.WriteLine("{0,20}\n",result);    // Print previous result
 
                 MenuItemsCount = DrawMenu(MenuItems);                 // Display the menu
 
@@ -34,94 +38,118 @@ namespace Calculator
 
                 if (i > 0 && i < MenuItemsCount)
                 {
-                    Console.Clear();
-                    Console.WriteLine(MenuItems[i]);                // Display Menu Title
+//                    Console.Clear();
+                    Console.WriteLine(MenuItemTitles[i-1]);                // Display Menu Title
                     Console.WriteLine("");
 
-                    tal1 = RequestNumberFromUser_Double($"{ValueStr[0]}?");
-                    if (i!= 5)
-                        tal2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
+                    value1 = RequestNumberFromUser_Double($"{ValueStr[0]}?");
+                    if (i != 5)      // If the user selected 5, Square root, only 1 value to get from the user
+                        value2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
 
                     switch (i)          // Act on the selected menu item
                     {
                         case 1:         // Addition
-                            result = Addition(tal1, tal2);
+                            result = Addition(value1, value2,out result_title);
                             break;
                         case 2:         // Subtraction
-                            result = Subtraction(tal1, tal2);
+                            result = Subtraction(value1, value2, out result_title);
                             break;
                         case 3:         // Multiplication
-                            result = Multiplication(tal1, tal2);
+                            result = Multiplication(value1, value2, out result_title);
                             break;
                         case 4:         // Division
-                            result = Division(tal1, tal2);
+                            result = Division(value1, value2, out result_title);
                             break;
                         case 5:         // Square root
-                            result = SquareRoot(tal1);
+                            result = SquareRoot(value1, out result_title);
+                            break;
+                        case 6:         // Pow
+                            result = Pow(value1, value2, out result_title);
                             break;
                         default:
                             result = 0;
+                            result_title = "";
                             break;
                     }
 
-                    Console.WriteLine("Result: {0}",result);
-                }
-                else if (i == 0)
+                    if (result_title.Length > 0)
+                        Console.WriteLine("{0} = {1}",result_title,result);    // Print the result if a valid result exists
+                    
+                    if (!exit)
+                    {
+                        WaitForUserPressedAKey();
+                    }
+               }
+                else if (i == 0)        // User selected menu item 0, exit the program
                     exit = true;
 
-                if (!exit)
-                {
-                    WaitForUserPressedAKey();
-                }
 
             } while (!exit);
         }
 
-        static double Addition(double tal1, double tal2)
+        static double Addition(double value1, double value2, out string result_title)
         {
             double r;
 
-            r = tal1 + tal2;
+            result_title = String.Format("{0} + {1}",value1, value2);
+            r = value1 + value2;
             return r;
         }
 
-        static double Subtraction(double tal1, double tal2)
+        static double Subtraction(double value1, double value2, out string result_title)
         {
             double r;
 
-            r = tal1 - tal2;
+            result_title = String.Format("{0} - {1}", value1, value2);
+            r = value1 - value2;
             return r;
         }
 
-        static double Multiplication(double tal1, double tal2)
+        static double Multiplication(double value1, double value2, out string result_title)
         {
             double r;
 
-            r = tal1 * tal2;
+            result_title = String.Format("{0} * {1}", value1, value2);
+            r = value1 * value2;
             return r;
         }
 
-        static double Division(double tal1, double tal2)
+        static double Division(double numerator, double denominator, out string result_title)
         {
             double r;
 
-            if (tal2 != 0)
-                r = tal1 / tal2;
+            if (denominator != 0)
+            {
+                result_title = String.Format("{0} / {1}", numerator, denominator);
+                r = numerator / denominator;
+            } 
             else
-	    {
+            {
+                result_title = "";
                 r = 0;
-                Console.WriteLine("Error! Value 2 is 0! Can't divide with 0\n");
+                Console.WriteLine("Error! The denominator is 0! Can't divide with 0\n");
             }
             return r;
         }
 
-        static double SquareRoot(double tal1)
+        static double SquareRoot(double value, out string result_title)
+        {
+            double r;
+            result_title = String.Format("Sqrt({0})", value);
+
+            r = Math.Sqrt(value);
+            return r;
+        }
+
+        static double Pow(double value1, double value2, out string result_title)
         {
             double r;
 
-            r = Math.Sqrt(tal1);
+            result_title = String.Format("{0} ^ {1}", value1, value2);
+            r = Math.Pow(value1,value2);
             return r;
         }
+
         /*
             * Function:    RequestStringFromUser
             * 
