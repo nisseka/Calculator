@@ -16,7 +16,8 @@ namespace Calculator
     {
         static string[] ValueStr = { "Value 1", "Value 2" };
 
-        static string[] FunctionTitles = { "Addition", 
+        static string[] FunctionTitles = { 
+                                           "Addition", 
                                            "Subtraction",
                                            "Multiplication",
                                            "Division", 
