@@ -69,54 +69,54 @@ namespace Calculator
                 {
                     i--;
                     Console.WriteLine(FunctionTitles[i]);                                               // Display a title
-                    Console.WriteLine("\nUsage: {0}\n",FunctionDescriptions[i]);                               // Display a description
+                    Console.WriteLine("\nUsage: {0}\n",FunctionDescriptions[i]);                        // Display a description
 
-                    if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // If selected menu item is Clear (7), dont input any values 
+                    if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // If selected menu item is Clear, dont input any values 
                     {
                         value1 = RequestNumberFromUser_Double($"{ValueStr[0]}?", result);
                         if (SelectedMenuItem != MenuItemTypes.SquareRoot &&
                             SelectedMenuItem != MenuItemTypes.Cos &&
                             SelectedMenuItem != MenuItemTypes.Pow10 &&
                             SelectedMenuItem != MenuItemTypes.Log &&
-                            SelectedMenuItem != MenuItemTypes.Sin)                                      // If selected menu item is Square root (5) or Sin (7) or Cos (8), only 1 value to get from the user
-                        {
+                            SelectedMenuItem != MenuItemTypes.Sin)                                      // If selected menu item is Square root or Sin or Cos or Log or Pow10
+                        {                                                                               // only 1 value to get from the user
                             value2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
                         }
                     }
 
-                    switch (SelectedMenuItem)          // Act on the selected menu item
+                    switch (SelectedMenuItem)                                                           // Act on the selected menu item
                     {
-                        case MenuItemTypes.Addition:                                    // Addition
+                        case MenuItemTypes.Addition:                                                    // Addition
                             result = Addition(value1, value2,out result_title);
                             break;
-                        case MenuItemTypes.Subtraction:                                 // Subtraction
+                        case MenuItemTypes.Subtraction:                                                 // Subtraction
                             result = Subtraction(value1, value2, out result_title);
                             break;
-                        case MenuItemTypes.Multiplication:                              // Multiplication
+                        case MenuItemTypes.Multiplication:                                              // Multiplication
                             result = Multiplication(value1, value2, out result_title);
                             break;
-                        case MenuItemTypes.Division:                                    // Division
+                        case MenuItemTypes.Division:                                                    // Division
                             Division(value1, value2, ref result, ref result_title);
                             break;
-                        case MenuItemTypes.SquareRoot:                                  // Square root
+                        case MenuItemTypes.SquareRoot:                                                  // Square root
                             SquareRoot(value1, ref result,ref result_title);
                             break;
-                        case MenuItemTypes.Pow10:
+                        case MenuItemTypes.Pow10:                                                       // 10^
                             result = Pow(10, value1, out result_title);
                             break;
-                        case MenuItemTypes.Pow:                                         // Pow
+                        case MenuItemTypes.Pow:                                                         // Pow
                             result = Pow(value1, value2, out result_title);
                             break;
-                        case MenuItemTypes.Sin:                                         // Sinus
+                        case MenuItemTypes.Sin:                                                         // Sinus
                             result = Sinus(value1, out result_title);
                             break;
-                        case MenuItemTypes.Cos:                                         // Cosinus
+                        case MenuItemTypes.Cos:                                                         // Cosinus
                             result = Cosinus(value1, out result_title);
                             break;
-                        case MenuItemTypes.Log:                                         // Cosinus
+                        case MenuItemTypes.Log:                                                         // Log
                             result = Log(value1, out result_title);
                             break;
-                        case MenuItemTypes.ClearResult:                                 // Clear result
+                        case MenuItemTypes.ClearResult:                                                 // Clear result
                         default:
                             result = 0;
                             result_title = empty_string;
@@ -124,13 +124,13 @@ namespace Calculator
                     }
 
                     if (result_title.Length > 0)
-                        Console.WriteLine("{0} = {1}",result_title,result);    // Print the result if a valid result exists
+                        Console.WriteLine("{0} = {1}",result_title,result);                             // Print the result if a valid result exists
                     
-                    if (SelectedMenuItem != MenuItemTypes.ClearResult)
-                    {
+                    if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // Only wait for a keypress if the selected menu item 
+                    {                                                                                   // isn't ClearResult
                         WaitForUserPressedAKey();
                     }
-               } else if (SelectedMenuItem == MenuItemTypes.Exit)                   // User selected menu item Exit (0), exit the program
+               } else if (SelectedMenuItem == MenuItemTypes.Exit)                                       // User selected menu item Exit (0), exit the program
                     exit = true;
 
 
@@ -241,13 +241,13 @@ namespace Calculator
         }
 
 
-        /*
-            * Function:    RequestStringFromUser
-            * 
-            * Outputs a title text specified by DisplayText in the console and records the users keypresses until return key is pressed
-            * 
-            * returns:    The recorded text string
-        */
+/*
+    * Function:    RequestStringFromUser
+    * 
+    * Outputs a title text specified by DisplayText in the console and records the users keypresses until return key is pressed
+    * 
+    * returns:    The recorded text string
+*/
         static string RequestStringFromUser(string DisplayText)
         {
             string r;
