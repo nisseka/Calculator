@@ -97,10 +97,16 @@ namespace Calculator
                             result = Multiplication(value1, value2, out result_title);
                             break;
                         case MenuItemTypes.Division:                                                    // Division
-                            Division(value1, value2, ref result, ref result_title);
+                            if (Division(value1, value2, ref result, ref result_title) == false)
+			    {
+                                Console.WriteLine("Error! The denominator is 0! Can't divide with 0\n");
+                            }
                             break;
                         case MenuItemTypes.SquareRoot:                                                  // Square root
-                            SquareRoot(value1, ref result,ref result_title);
+                            if (SquareRoot(value1, ref result,ref result_title) == false)
+			    {
+                                Console.WriteLine("Error! Can't take the square root of a negative number!\n");
+                            }
                             break;
                         case MenuItemTypes.Pow10:                                                       // 10^
                             result = Pow(10, value1, out result_title);
@@ -178,7 +184,6 @@ namespace Calculator
             else
             {
                 result_title = empty_string;
-                Console.WriteLine("Error! The denominator is 0! Can't divide with 0\n");
                 r = false;
             }
             return r;
@@ -196,7 +201,6 @@ namespace Calculator
             } else
 	    {
                 result_title = empty_string;
-                Console.WriteLine("Error! Can't take the square root of a negative number!\n");
                 r = false;
             }
             return r;
