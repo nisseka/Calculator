@@ -63,7 +63,7 @@ namespace Calculator
 
                 MenuItemsCount = DrawMenu(MenuItemStrs);                                                // Display the menu
 
-                i=RequestNumberFromUser_Int("\nEnter selection:");                                      // The user must enter a value which menu item it wants
+                i=PrintStringAndRequestNumberFromUser_Int("\nEnter selection:");                                      // The user must enter a value which menu item it wants
                 SelectedMenuItem = (MenuItemTypes) i;
 
                 if (SelectedMenuItem > MenuItemTypes.Exit && SelectedMenuItem <= MenuItemTypes.ClearResult)
@@ -74,14 +74,14 @@ namespace Calculator
 
                     if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // If selected menu item is Clear, dont input any values 
                     {
-                        value1 = RequestNumberFromUser_Double($"{ValueStr[0]}?", result);
+                        value1 = PrintStringAndRequestNumberFromUser_Double($"{ValueStr[0]}?", result);
                         if (SelectedMenuItem != MenuItemTypes.SquareRoot &&
                             SelectedMenuItem != MenuItemTypes.Cos &&
                             SelectedMenuItem != MenuItemTypes.Pow10 &&
                             SelectedMenuItem != MenuItemTypes.Log &&
                             SelectedMenuItem != MenuItemTypes.Sin)                                      // If selected menu item is Square root or Sin or Cos or Log or Pow10
                         {                                                                               // only 1 value to get from the user
-                            value2 = RequestNumberFromUser_Double($"{ValueStr[1]}?");
+                            value2 = PrintStringAndRequestNumberFromUser_Double($"{ValueStr[1]}?");
                         }
                     }
 
@@ -247,13 +247,13 @@ namespace Calculator
 
 
 /*
-    * Function:    RequestStringFromUser
+    * Function:    PrintTitleAndRequestNumberFromUser_Int
     * 
     * Outputs a title text specified by DisplayText in the console and records the users keypresses until return key is pressed
     * 
     * returns:    The recorded text string
 */
-        static string RequestStringFromUser(string DisplayText)
+        static string PrintStringAndRequestStringFromUser(string DisplayText)
         {
             string r;
             Console.Write("{0} ", DisplayText);
@@ -262,7 +262,7 @@ namespace Calculator
         }
 
 /*
-    * Function:    RequestNumberFromUser_Int
+    * Function:    PrintStringAndRequestNumberFromUser_Int
     * 
     * Outputs a title text specified by DisplayText in the console and waits for the user to enter a number. If DefaultValue isn't 0, display it to 
     * the user in parentheses, for example (56). Then if the user doesn't enter anything (only presses return), use the value specified in DefaultValue
@@ -270,10 +270,10 @@ namespace Calculator
     * returns:    The number in Integer format
     * 
 */
-        static int RequestNumberFromUser_Int(string DisplayText, int DefaultValue = 0)
+        static int PrintStringAndRequestNumberFromUser_Int(string DisplayText, int DefaultValue = 0)
         {
             int r = 0;
-            string s;
+            string str;
             bool exit;
 
             if (DefaultValue != 0)
@@ -283,22 +283,22 @@ namespace Calculator
 
             do
             {
-                s = RequestStringFromUser(DisplayText);
+                str = PrintStringAndRequestStringFromUser(DisplayText);
 
-                if (s.Length == 0 && DefaultValue != 0)
+                if (str.Length == 0 && DefaultValue != 0)
                 {
                     r = DefaultValue;
                     exit = true;
                 }
                 else
-                    exit = int.TryParse(s, out r);
+                    exit = int.TryParse(str, out r);
  
             } while (!exit);
             return r;
         }
        
 /*
-    * Function:    RequestNumberFromUser_Double
+    * Function:    PrintStringAndRequestNumberFromUser_Double
     * 
     * Outputs a title text specified by DisplayText in the console and waits for the user to enter a number. If DefaultValue isn't 0, display it to 
     * the user in parentheses, for example (56). Then if the user doesn't enter anything (only presses return), use the value specified in DefaultValue
@@ -306,10 +306,10 @@ namespace Calculator
     * returns:    The number in Double format
 
 */
-        static double RequestNumberFromUser_Double(string DisplayText, double DefaultValue = 0)
+        static double PrintStringAndRequestNumberFromUser_Double(string DisplayText, double DefaultValue = 0)
         {
             double r = 0;
-            string s;
+            string str;
             bool exit;
 
 	    if (DefaultValue != 0)
@@ -319,13 +319,13 @@ namespace Calculator
 
             do
             {
-                s = RequestStringFromUser(DisplayText);
-                if (s.Length == 0 && DefaultValue != 0)
+                str = PrintStringAndRequestStringFromUser(DisplayText);
+                if (str.Length == 0 && DefaultValue != 0)
                 {
                     r = DefaultValue;
                     exit = true;
                 } else
-                    exit = double.TryParse(s, out r);
+                    exit = double.TryParse(str, out r);
  
             } while (!exit);
             return r;
