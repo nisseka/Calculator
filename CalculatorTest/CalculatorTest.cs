@@ -55,7 +55,7 @@ namespace Calculator.Test
 	[InlineData(new double[] {8,25},33, true)]
 	[InlineData(new double[] { 8 }, 8, true)]
 	[InlineData(new double[] {  }, 0, false)]	    // Test with an empty array of numbers
-	public void AdditionMultipleValuesTest(double[] values, double expectedResult, bool expectedSuccess)
+	public void AdditionArrayOfValuesTest(double[] values, double expectedResult, bool expectedSuccess)
 	{
 	    // Arrange
 	    string resultTitle;
@@ -81,7 +81,7 @@ namespace Calculator.Test
 	[Theory]
 	[InlineData(new double[] { 8, 25 }, -17, true)]
 	[InlineData(new double[] { }, 0, false)]            // Test with an empty array of numbers
-	public void SubtractionMultipleValuesTest(double[] values, double expectedResult, bool expectedSuccess)
+	public void SubtractionArrayOfValuesTest(double[] values, double expectedResult, bool expectedSuccess)
 	{
 	    // Arrange
 	    string resultTitle;
