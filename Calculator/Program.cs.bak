@@ -52,7 +52,7 @@ namespace Calculator
             int MenuItemsCount,i;
             MenuItemTypes SelectedMenuItem;
             double result=0, value1=0, value2=0;
-            string resultTitleString=empty_string;
+            string resultTitle=empty_string;
 
             do
             {
@@ -89,50 +89,50 @@ namespace Calculator
                     switch (SelectedMenuItem)                                                           // Act on the selected menu item
                     {
                         case MenuItemTypes.Addition:                                                    // Addition
-                            result = Addition(value1, value2,out resultTitleString);
+                            result = Addition(value1, value2,out resultTitle);
                             break;
                         case MenuItemTypes.Subtraction:                                                 // Subtraction
-                            result = Subtraction(value1, value2, out resultTitleString);
+                            result = Subtraction(value1, value2, out resultTitle);
                             break;
                         case MenuItemTypes.Multiplication:                                              // Multiplication
-                            result = Multiplication(value1, value2, out resultTitleString);
+                            result = Multiplication(value1, value2, out resultTitle);
                             break;
                         case MenuItemTypes.Division:                                                    // Division
-                            if (Division(value1, value2, ref result, ref resultTitleString) == false)
+                            if (Division(value1, value2, ref result, ref resultTitle) == false)
 			    {
                                 Console.WriteLine("Error! The denominator is 0! Can't divide with 0\n");
                             }
                             break;
                         case MenuItemTypes.SquareRoot:                                                  // Square root
-                            if (SquareRoot(value1, ref result,ref resultTitleString) == false)
+                            if (SquareRoot(value1, ref result,ref resultTitle) == false)
 			    {
                                 Console.WriteLine("Error! Can't take the square root of a negative number!\n");
                             }
                             break;
                         case MenuItemTypes.Pow10:                                                       // 10^
-                            result = Pow(10, value1, out resultTitleString);
+                            result = Pow(10, value1, out resultTitle);
                             break;
                         case MenuItemTypes.Pow:                                                         // Pow
-                            result = Pow(value1, value2, out resultTitleString);
+                            result = Pow(value1, value2, out resultTitle);
                             break;
                         case MenuItemTypes.Sin:                                                         // Sinus
-                            result = Sinus(value1, out resultTitleString);
+                            result = Sinus(value1, out resultTitle);
                             break;
                         case MenuItemTypes.Cos:                                                         // Cosinus
-                            result = Cosinus(value1, out resultTitleString);
+                            result = Cosinus(value1, out resultTitle);
                             break;
                         case MenuItemTypes.Log:                                                         // Log
-                            result = Log(value1, out resultTitleString);
+                            result = Log(value1, out resultTitle);
                             break;
                         case MenuItemTypes.ClearResult:                                                 // Clear result
                         default:
                             result = 0;
-                            resultTitleString = empty_string;
+                            resultTitle = empty_string;
                             break;
                     }
 
-                    if (resultTitleString.Length > 0)
-                        Console.WriteLine("{0} = {1}",resultTitleString,result);                        // Print the result if a valid result exists
+                    if (resultTitle.Length > 0)
+                        Console.WriteLine("{0} = {1}",resultTitle,result);                             // Print the result if a valid result exists
                     
                     if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // Only wait for a keypress if the selected menu item 
                     {                                                                                   // isn't ClearResult
@@ -145,16 +145,16 @@ namespace Calculator
             } while (!exit);
         }
 
-        public static double Addition(double value1, double value2, out string resultTitleString)
+        public static double Addition(double value1, double value2, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("{0} + {1}",value1, value2);
+            resultTitle = String.Format("{0} + {1}",value1, value2);
             result = value1 + value2;
             return result;
         }
 
-        public static double Addition(double[] values, out string resultTitleString)
+        public static double Addition(double[] values, out string resultTitle)
 	{
             if (values.Length < 1)
             {
@@ -179,20 +179,20 @@ namespace Calculator
 		}
 	    }
 
-            resultTitleString = sb.ToString();
+            resultTitle = sb.ToString();
             return result;
         }
 
-        public static double Subtraction(double value1, double value2, out string resultTitleString)
+        public static double Subtraction(double value1, double value2, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("{0} - {1}", value1, value2);
+            resultTitle = String.Format("{0} - {1}", value1, value2);
             result = value1 - value2;
             return result;
         }
 
-        public static double Subtraction(double[] values, out string resultTitleString)
+        public static double Subtraction(double[] values, out string resultTitle)
         {
             if (values.Length < 2)
             {
@@ -219,88 +219,88 @@ namespace Calculator
                 }
             }
 
-            resultTitleString = sb.ToString();
+            resultTitle = sb.ToString();
             return result;
         }
 
-        public static double Multiplication(double value1, double value2, out string resultTitleString)
+        public static double Multiplication(double value1, double value2, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("{0} * {1}", value1, value2);
+            resultTitle = String.Format("{0} * {1}", value1, value2);
             result = value1 * value2;
             return result;
         }
 
-        public static bool Division(double numerator, double denominator, ref double result, ref string resultTitleString)
+        public static bool Division(double numerator, double denominator, ref double result, ref string resultTitle)
         {
-            bool success;
+            bool r;
 
             if (denominator != 0)
             {
-                resultTitleString = String.Format("{0} / {1}", numerator, denominator);
+                resultTitle = String.Format("{0} / {1}", numerator, denominator);
                 result = numerator / denominator;
-                success = true;
+                r = true;
             }
             else
             {
-                resultTitleString = empty_string;
-                success = false;
+                resultTitle = empty_string;
+                r = false;
             }
-            return success;
+            return r;
         }
 
-        public static bool SquareRoot(double value, ref double result,ref string resultTitleString)
+        public static bool SquareRoot(double value, ref double result,ref string resultTitle)
         {
-            bool success;
+            bool r;
 
             if (value >= 0)
             {
-                resultTitleString = String.Format("Sqrt({0})", value);
+                resultTitle = String.Format("Sqrt({0})", value);
                 result = Math.Sqrt(value);
-                success = true;
+                r = true;
             } else
 	    {
-                resultTitleString = empty_string;
-                success = false;
+                resultTitle = empty_string;
+                r = false;
             }
-            return success;
+            return r;
         }
 
-        public static double Pow(double value1, double value2, out string resultTitleString)
+        public static double Pow(double value1, double value2, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("{0} ^ {1}", value1, value2);
+            resultTitle = String.Format("{0} ^ {1}", value1, value2);
             result = Math.Pow(value1,value2);
             return result;
         }
 
-        public static double Sinus(double value, out string resultTitleString)
+        public static double Sinus(double value, out string resultTitle)
 	{
             double result;
 
-            resultTitleString = String.Format("Sin({0})", value);
+            resultTitle = String.Format("Sin({0})", value);
 
             result = Math.Sin(Deg2Rad(value));                       // Use Deg2Rad to convert the angle in value to radians
             return result;
         }
 
-        public static double Cosinus(double value, out string resultTitleString)
+        public static double Cosinus(double value, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("Cos({0})", value);
+            resultTitle = String.Format("Cos({0})", value);
 
             result = Math.Cos(Deg2Rad(value));                       // Use Deg2Rad to convert the angle in value to radians
             return result;
         }
 
-        public static double Log(double value, out string resultTitleString)
+        public static double Log(double value, out string resultTitle)
         {
             double result;
 
-            resultTitleString = String.Format("Log({0})", value);
+            resultTitle = String.Format("Log({0})", value);
 
             result = Math.Log10(value);
             return result;
