@@ -169,7 +169,8 @@ namespace Calculator
     * 
     * returns:  values[0] + ... values[N]
     * 
- */        public static double Addition(double[] values, out string resultTitleString)
+ */        
+        public static double Addition(double[] values, out string resultTitleString)
 	{
             if (values.Length < 1)
             {
