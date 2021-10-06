@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using Calculator;
 
-namespace Calculator.Test
+namespace Calculator.Tests
 {
     public class CalculatorTests
     {
