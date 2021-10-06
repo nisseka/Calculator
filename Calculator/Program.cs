@@ -17,7 +17,7 @@ namespace Calculator
     {
         static string[] ValueStr = { "Value 1", "Value 2" };
 
-        static string[] FunctionTitles = { 
+        static string[] MethodTitles = { 
                                            "Addition", 
                                            "Subtraction",
                                            "Multiplication",
@@ -29,7 +29,7 @@ namespace Calculator
                                            "Cosinus",
                                            "Log",
                                            "Clear Result" };
-        static string[] FunctionDescriptions = {
+        static string[] MethodDescriptions = {
                                              $"{ValueStr[0]} + {ValueStr[1]}",
                                              $"{ValueStr[0]} - {ValueStr[1]}",
                                              $"{ValueStr[0]} * {ValueStr[1]}",
@@ -70,8 +70,8 @@ namespace Calculator
                 if (SelectedMenuItem > MenuItemTypes.Exit && SelectedMenuItem <= MenuItemTypes.ClearResult)
                 {
                     i--;
-                    Console.WriteLine(FunctionTitles[i]);                                               // Display a title
-                    Console.WriteLine("\nUsage: {0}\n",FunctionDescriptions[i]);                        // Display a description
+                    Console.WriteLine(MethodTitles[i]);                                               // Display a title
+                    Console.WriteLine("\nUsage: {0}\n",MethodDescriptions[i]);                        // Display a description
 
                     if (SelectedMenuItem != MenuItemTypes.ClearResult)                                  // If selected menu item is Clear, dont input any values 
                     {
@@ -145,6 +145,14 @@ namespace Calculator
             } while (!exit);
         }
 
+/*
+    * Method:   Addition
+    * 
+    * Performs an addition.
+    * 
+    * returns:  value1 + value2
+    * 
+ */
         public static double Addition(double value1, double value2, out string resultTitleString)
         {
             double result;
@@ -154,7 +162,14 @@ namespace Calculator
             return result;
         }
 
-        public static double Addition(double[] values, out string resultTitleString)
+/*
+    * Method:   Addition
+    * 
+    * Performs an addition with multiple values in the values array
+    * 
+    * returns:  values[0] + ... values[N]
+    * 
+ */        public static double Addition(double[] values, out string resultTitleString)
 	{
             if (values.Length < 1)
             {
@@ -183,6 +198,14 @@ namespace Calculator
             return result;
         }
 
+/*
+    * Method:   Subtraction
+    * 
+    * Performs a subtraction.
+    * 
+    * returns:  value1 - value2
+    * 
+ */        
         public static double Subtraction(double value1, double value2, out string resultTitleString)
         {
             double result;
@@ -192,6 +215,14 @@ namespace Calculator
             return result;
         }
 
+/*
+    * Method:   Subtraction
+    * 
+    * Performs a subtraction with multiple values in the values array
+    * 
+    * returns:  values[0] - ... values[N]
+    * 
+*/
         public static double Subtraction(double[] values, out string resultTitleString)
         {
             if (values.Length < 2)
@@ -231,7 +262,16 @@ namespace Calculator
             result = value1 * value2;
             return result;
         }
-
+/*
+    * Method:   Division
+    * 
+    * Performs a division, numerator / denominator
+    * 
+    * returns:    
+    *           True:   Division succeded; the variable referenced bv parameter result will contain the result
+    *           False:  Division failed; denominator is 0, divison with 0
+    * 
+*/
         public static bool Division(double numerator, double denominator, ref double result, ref string resultTitleString)
         {
             bool success;
@@ -250,6 +290,16 @@ namespace Calculator
             return success;
         }
 
+/*
+    * Method:   SquareRoot
+    * 
+    * Takes the SquareRoot of number value
+    * 
+    * returns:    
+    *           True:   SquareRoot succeded; the variable referenced bv parameter result will contain the result
+    *           False:  SquareRoot of a negative number; not allowed
+    * 
+*/
         public static bool SquareRoot(double value, ref double result,ref string resultTitleString)
         {
             bool success;
@@ -267,6 +317,11 @@ namespace Calculator
             return success;
         }
 
+/*
+    * Method:   Pow
+    * 
+    * returns:  The number value1 raised to the power value2.
+*/
         public static double Pow(double value1, double value2, out string resultTitleString)
         {
             double result;
@@ -276,6 +331,11 @@ namespace Calculator
             return result;
         }
 
+/*
+    * Method:   Sinus
+    * 
+    * returns:  The sine of the specified angle in degrees
+*/
         public static double Sinus(double value, out string resultTitleString)
 	{
             double result;
@@ -286,6 +346,11 @@ namespace Calculator
             return result;
         }
 
+/*
+    * Method:   Cosinus
+    * 
+    * returns:  The cosine of the specified angle in degrees
+*/
         public static double Cosinus(double value, out string resultTitleString)
         {
             double result;
@@ -296,6 +361,11 @@ namespace Calculator
             return result;
         }
 
+/*
+    * Method:   Log
+    * 
+    * returns:  The base 10 logarithm of the number value
+*/
         public static double Log(double value, out string resultTitleString)
         {
             double result;
@@ -308,7 +378,7 @@ namespace Calculator
 
 
 /*
-    * Function:   PrintStringAndRequestStringFromUser
+    * Method:   PrintStringAndRequestStringFromUser
     * 
     * Outputs a title text specified by displayText in the console and records the users keypresses until return key is pressed
     * 
@@ -321,7 +391,7 @@ namespace Calculator
         }
 
 /*
-    * Function:    PrintStringAndRequestNumberFromUser_Int
+    * Metod:    PrintStringAndRequestNumberFromUser_Int
     * 
     * Outputs a title text specified by displayText in the console and waits for the user to enter a number. If defaultValue isn't 0, display it to 
     * the user in parentheses, for example (56). Then if the user doesn't enter anything (only presses return), use the value specified in defaultValue
@@ -357,7 +427,7 @@ namespace Calculator
         }
        
 /*
-    * Function:    PrintStringAndRequestNumberFromUser_Double
+    * Method:    PrintStringAndRequestNumberFromUser_Double
     * 
     * Outputs a title text specified by displayText in the console and waits for the user to enter a number. If defaultValue isn't 0, display it to 
     * the user in parentheses, for example (56). Then if the user doesn't enter anything (only presses return), use the value specified in defaultValue
@@ -393,7 +463,7 @@ namespace Calculator
 
 
 /*
-    * Function:    WaitForUserPressedAKey
+    * Method:    WaitForUserPressedAKey
     * 
     * Outputs an information text and waits for the user to press a key to continue
 */
@@ -404,7 +474,7 @@ namespace Calculator
         }
 
 /*
-    *  Function:    DrawMenu
+    *  Method:    DrawMenu
     *  
     *  Outputs a menu specified by menuItems to the console
     *  
@@ -425,14 +495,14 @@ namespace Calculator
         }
 
 /*
-    *   Function:    Deg2Rad
+    *   Method:    Deg2Rad
     *
     *   Converts an angle in degrees to radians
     *   
     *   returns:    angle in radians
     *
 */
-        static double Deg2Rad(double angleInDegrees)
+        public static double Deg2Rad(double angleInDegrees)
         {
             return (angleInDegrees / 180) * Math.PI; 
         }

@@ -68,7 +68,7 @@ namespace Calculator.Test
 		result = Program.Addition(values, out resultTitle);
 		success = true;
 	    }
-	    catch (Exception e)
+	    catch (ArgumentOutOfRangeException e)
 	    {
 		success = false;
 	    }
@@ -94,7 +94,7 @@ namespace Calculator.Test
 		result = Program.Subtraction(values, out resultTitle);
 		success = true;
 	    }
-	    catch (Exception e)
+	    catch (ArgumentOutOfRangeException e)
 	    {
 		success = false;
 	    }
@@ -228,6 +228,18 @@ namespace Calculator.Test
 	    Assert.Equal(expectedResult, result, 3);
 	}
 
-    }
+	[Theory]
+	[InlineData(25, 0.436)]
+	public void Deg2RadTest(double value, double expectedResult)
+	{
+	    // Arrange
 
+	    // Act
+	    double result = Program.Deg2Rad(value);
+
+	    // Assert
+	    Assert.Equal(expectedResult, result, 3);
+	}
+
+    }
 }
